@@ -1,0 +1,19 @@
+name: Deploy a simple web application using github actions
+on:
+ push:
+    branches:
+      - main
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: build docker image
+        run: |
+             docker build -t sure2zen/testrepo:nginx-app_v1 .
+    
+      - name: fetch the list of docker images
+        run: |
+             docker images -a
